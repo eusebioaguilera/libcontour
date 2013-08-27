@@ -9,6 +9,8 @@
 #include "../src/plotter.hpp"
 %}
 
+%include "std_string.i"
+%include "std_vector.i"
 %include "../src/point.hpp"
 %include "../src/rect.hpp"
 %include "../src/contour.hpp"
