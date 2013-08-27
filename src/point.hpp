@@ -35,24 +35,56 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
-#include <boost/geometry/geometries/point_xy.hpp>
-#include <boost/geometry/geometries/segment.hpp>
+//#include <boost/geometry/geometries/point_xy.hpp>
+//#include <boost/geometry/geometries/segment.hpp>
+
+#include <cmath>
 
 namespace libcontour {
 
-typedef boost::geometry::model::d2::point_xy<double> Point;
+    class Point {
+        private:
+            float _x;
+            float _y;
+        public:
+            // Constructors
+            Point( void );
+            Point( float value_x, float value_y );
+        
+            // Getters
+            inline float x( void ) const { return this->_x; }
+            inline float y( void ) const { return this->_y; }
+            
+            // Setters
+            void x( float value ) { this->_x = value; }
+            void y( float value ) { this->_y = value; }
+            
+            /*
+             * Distance from point this to point p
+             * */
+            double distance( Point p );
+            
+            /*
+             * Operators
+             * */
+            bool operator==( const Point &p );
+            
+            bool operator<( const Point &p );
+    };
 
-struct PointComparer {
-	inline bool operator() ( const Point &p1, const Point &p2 ) {
-		if ( p1.x() < p2.x() ) {
-			return true;
-		} else if ( p1.x() == p2.x() and p1.y() < p2.y() ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-};
+//typedef boost::geometry::model::d2::point_xy<double> Point;
+
+//struct PointComparer {
+	//inline bool operator() ( const Point &p1, const Point &p2 ) {
+		//if ( p1.x() < p2.x() ) {
+			//return true;
+		//} else if ( p1.x() == p2.x() and p1.y() < p2.y() ) {
+			//return true;
+		//} else {
+			//return false;
+		//}
+	//}
+//};
 
 };
 
