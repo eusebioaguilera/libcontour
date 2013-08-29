@@ -38,7 +38,7 @@ Contour::Contour() {
 Contour::Contour( const std::string &path_to_file ) {
     double x = 0, y = 0;
     std::fstream fp;
-    std::map< std::pair<double, double>, int > nn;
+    //std::map< std::pair<double, double>, int > nn;
     int counter = 0;
     
     fp.open(path_to_file.c_str(), std::ios_base::in);
@@ -52,13 +52,15 @@ Contour::Contour( const std::string &path_to_file ) {
 
 			if (!fp.eof())
 			{
-				Point p = Point( static_cast<double>(x), static_cast<double>(y) );
+				Point p = Point( static_cast<float>(x), static_cast<float>(y) );
 				
 				// Add point to the polygon
-				boost::geometry::append( this->_contour, p );
+				//boost::geometry::append( this->_contour, p );
+                this->_points.push_back( p );
 				
 				// Add index to indexes
-				this->_indexes[ p ] = counter;
+                this->_indexes[ p ].push_back( counter );
+				//this->_indexes[ p ] = counter;
 				
 				counter++;
 			}
@@ -69,32 +71,31 @@ Contour::Contour( const std::string &path_to_file ) {
 }
 
 Contour::Contour( std::vector<Point> points ) {
-	int counter = 0;
+	//int counter = 0;
 	
 	for ( std::vector<Point>::iterator it = points.begin(); it != points.end(); it++ ) {
-		this->_indexes[ *it ] = counter;
-		counter++;
+		//this->_indexes[ *it ] = counter;
+		//counter++;
+        this->_points.push_back( *it );
 	}
 	// Assign
-	boost::geometry::assign_points( this->_contour, points );
+	//boost::geometry::assign_points( this->_contour, points );
 }
 
-void Contour::markAsDominant( int pos ) {
+void Contour::dominant( int pos, bool value ) {
 	if ( pos < size() and pos > -1 ) {
-		this->_dominants.insert( pos );
-	}
-}
-
-void Contour::unMarkAsDominant( int pos ) {
-	if ( pos < size() and pos > -1 ) {
-		this->_dominants.erase( pos );
+        if ( value ) {
+            this->_dominants.insert( pos );
+        } else {
+            this->_dominants.erase( pos );
+        }
 	}
 }
 
 Point Contour::operator[] ( int pos ) const {
 	Point p;
 	if ( pos < size() and pos > -1 ) {
-		p = this->_contour.outer()[ pos ];
+		p = this->_points[ pos ];
 	}
 	
 	return p;
@@ -109,8 +110,8 @@ std::vector <Point> Contour::slice( int init, int end) {
 		
 		if ( init < end ) {
 			// Get normal slice
-			it_init = this->_contour.outer().begin() + init;
-			it_end = this->_contour.outer().begin() + end;
+			it_init = this->_points.begin() + init;
+			it_end = this->_points.begin() + end;
 			for ( std::vector<Point>::iterator it = it_init; it != it_end; it++ ) {
 				sl.push_back( *it );
 			}
@@ -119,10 +120,10 @@ std::vector <Point> Contour::slice( int init, int end) {
 			sl.push_back( *it_end );
 		} else {
 			// Get a slice that cross zero position a beyond
-			it_init = this->_contour.outer().begin() + init;
-			it_end = this->_contour.outer().begin() + end;
-			it_last = this->_contour.outer().end();
-			it_first = this->_contour.outer().begin();
+			it_init = this->_points.begin() + init;
+			it_end = this->_points.begin() + end;
+			it_last = this->_points.end();
+			it_first = this->_points.begin();
 			for ( std::vector<Point>::iterator it = it_init; it != it_end; it++ ) {
 				sl.push_back( *it );
 				

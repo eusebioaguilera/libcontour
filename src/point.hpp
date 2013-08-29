@@ -67,9 +67,9 @@ namespace libcontour {
             /*
              * Operators
              * */
-            bool operator==( const Point &p );
+            bool operator==( const Point &p ) const;
             
-            bool operator<( const Point &p );
+            bool operator<( const Point &p ) const;
     };
 
 //typedef boost::geometry::model::d2::point_xy<double> Point;

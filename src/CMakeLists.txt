@@ -1,7 +1,7 @@
 #set(MAIN_SRC main.cpp)
 set(LIB_SRC 
     point.cpp
-	#contour.cpp
+	contour.cpp
 	#rect.cpp
 	#evaluator.cpp
 	#plotter.cpp

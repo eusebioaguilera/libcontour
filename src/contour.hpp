@@ -25,21 +25,16 @@
 #ifndef CONTOUR_HPP
 #define CONTOUR_HPP
 
-#include <set>
-#include <map>
 #include <string>
 #include <fstream>
-#include <valarray>
+#include <vector>
+#include <set>
+#include <map>
 #include "point.hpp"
 
-// Boost
-#include <boost/geometry/geometries/polygon.hpp>
-#include <boost/geometry.hpp>
+
 
 namespace libcontour {
-
-typedef boost::geometry::model::polygon<Point> Polygon;
-typedef std::valarray<int> ContourApp;
 
 
 /**
@@ -53,47 +48,48 @@ typedef std::valarray<int> ContourApp;
  * */
 
 class Contour {
+    private:
+        std::vector<Point> _points;
+        std::set<int> _dominants;
+        std::map< Point, std::vector<int> > _indexes;
 	public:
 		Contour();
 		Contour( std::vector<Point> points );
 		Contour( const std::string &path_to_file );
 		
-		// Getters
-		inline Polygon polygon( void ) const { return this->_contour; }
+		//// Getters
+		inline std::vector<Point> points ( void ) const { return this->_points; }
 		inline std::set<int> dominantsIndexes( void ) const { return this->_dominants; }
-		inline std::map<Point, int, PointComparer> indexes( void ) const { return this->_indexes; }
+		inline std::map< Point, std::vector<int> > indexes( void ) const { return this->_indexes; }
 		
-		// Operators
+		//// Operators
 		Point operator[] ( int pos ) const;
 		
-		/// Returns a slice from init point to end point
+		///// Returns a slice from init point to end point
 		std::vector <Point> slice( int init, int end);
 		
-		/// Returns the size of the contour in number of points
-		inline int size( void ) const {  return boost::geometry::num_points( this->_contour ); }
+		///// Returns the size of the contour in number of points
+		inline int size( void ) const {  return this->_points.size(); }
 		
-		/// Returns the number of points that have been marked as dominant 
+		///// Returns the number of points that have been marked as dominant 
 		inline int dominantsSize( void ) const { return this->_dominants.size(); }
 		
-		/// Return the index of the point p inside the contour in the order that the contour has been read
-		inline int index_of( const Point &p ) { return this->_indexes[ p ]; }
+		///// Return the index of the point p inside the contour in the order that the contour has been read
+		inline std::vector<int> index_of( const Point &p ) { return this->_indexes[ p ]; }
 		
-		/// Mark the point as dominant
-		void markAsDominant( int pos );
-		
-		/// Mark the point as non dominant
-		void unMarkAsDominant( int pos );
+		///// Set/UnSet the point as dominant
+		void dominant( int pos, bool value );
 
-		/// Returns the next point (index) marked as dominant
+		///// Returns the next point (index) marked as dominant
 		int dominantNextNeighbour( int pos );
 		
-		/// Returns the previous point (index) marked as dominant 
+		///// Returns the previous point (index) marked as dominant 
 		int dominantPreviousNeighbour( int pos );
 	
-	private:
-		Polygon _contour;
-		std::set<int> _dominants;
-		std::map< Point, int, PointComparer > _indexes;
+	//private:
+		//Polygon _contour;
+		//std::set<int> _dominants;
+		//std::map< Point, int, PointComparer > _indexes;
 };
 
 };

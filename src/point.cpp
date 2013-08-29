@@ -37,7 +37,7 @@ namespace libcontour {
         return sqrt( pow( p.x() - this->x(), 2 ) + pow( p.y() - this->y(), 2 ) );
     }
     
-    bool Point::operator==( const Point &p ) {
+    bool Point::operator==( const Point &p ) const {
         if ( this->x() == p.x() && this->y() == p.y() ) {
             return true;
         }
@@ -45,7 +45,7 @@ namespace libcontour {
         return false;
     }
     
-    bool Point::operator<( const Point &p ) {
+    bool Point::operator<( const Point &p ) const {
         if ( this->x() < p.x() ) {
 			return true;
 		} else if ( this->x() == p.x() and this->y() < p.y() ) {
