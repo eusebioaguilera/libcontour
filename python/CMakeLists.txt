@@ -11,5 +11,5 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 SET(CMAKE_SWIG_FLAGS "")
 
 SET_SOURCE_FILES_PROPERTIES(pylibcontour.i PROPERTIES CPLUSPLUS ON)
-SWIG_ADD_MODULE(pylibcontour python pylibcontour.i ../src/point.cpp ../src/contour.cpp ../src/rect.cpp)
+SWIG_ADD_MODULE(pylibcontour python pylibcontour.i ../src/point.cpp ../src/contour.cpp ../src/rect.cpp ../src/evaluator.cpp ) 
 SWIG_LINK_LIBRARIES(pylibcontour ${PYTHON_LIBRARIES})

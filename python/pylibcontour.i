@@ -5,10 +5,9 @@
 #include "../src/point.hpp"
 #include "../src/contour.hpp"
 #include "../src/rect.hpp"
-/*
-
-
 #include "../src/evaluator.hpp"
+
+/*
 #include "../src/plotter.hpp"
 */
 %}
@@ -34,7 +33,8 @@ namespace std {
 
 %include "../src/contour.hpp"
 %include "../src/rect.hpp"
-/*
 %include "../src/evaluator.hpp"
+
+/*
 %include "../src/plotter.hpp"
 */

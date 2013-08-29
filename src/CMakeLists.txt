@@ -3,7 +3,7 @@ set(LIB_SRC
     point.cpp
 	contour.cpp
 	rect.cpp
-	#evaluator.cpp
+	evaluator.cpp
 	#plotter.cpp
 	)
 
