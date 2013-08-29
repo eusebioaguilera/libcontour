@@ -33,6 +33,7 @@
 #include <mgl/mgl.h>
 #include <mgl/mgl_eps.h>
 #include <string>
+#include <sstream>
 
 /**
  * @file plotter.hpp

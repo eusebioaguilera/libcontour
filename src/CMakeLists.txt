@@ -4,11 +4,11 @@ set(LIB_SRC
 	contour.cpp
 	rect.cpp
 	evaluator.cpp
-	#plotter.cpp
+	plotter.cpp
 	)
 
 #Sends the -Wall flag to the gcc compiler
 add_definitions(-Wall)
 #This tells CMake to create a shared lib
 add_library(contour SHARED ${LIB_SRC})
-target_link_libraries(contour)
+target_link_libraries(contour -lmgl)

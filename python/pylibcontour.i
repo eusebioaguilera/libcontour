@@ -6,10 +6,7 @@
 #include "../src/contour.hpp"
 #include "../src/rect.hpp"
 #include "../src/evaluator.hpp"
-
-/*
 #include "../src/plotter.hpp"
-*/
 %}
 
 %include "std_string.i"
@@ -34,7 +31,4 @@ namespace std {
 %include "../src/contour.hpp"
 %include "../src/rect.hpp"
 %include "../src/evaluator.hpp"
-
-/*
 %include "../src/plotter.hpp"
-*/
