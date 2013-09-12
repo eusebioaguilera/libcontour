@@ -6,6 +6,7 @@ set(LIB_SRC
 	evaluator.cpp
 	plotter.cpp
     chaincodes.cpp
+    algorithms.cpp
 	)
 
 #Sends the -Wall flag to the gcc compiler

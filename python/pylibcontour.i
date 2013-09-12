@@ -8,6 +8,7 @@
 #include "../src/evaluator.hpp"
 #include "../src/plotter.hpp"
 #include "../src/chaincodes.hpp"
+#include "../src/algorithms.hpp"
 %}
 
 %include "std_string.i"
@@ -34,4 +35,4 @@ namespace std {
 %include "../src/evaluator.hpp"
 %include "../src/plotter.hpp"
 %include "../src/chaincodes.hpp"
-
+%include "../src/algorithms.hpp"
