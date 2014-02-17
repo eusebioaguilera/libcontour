@@ -22,6 +22,8 @@ namespace std {
     %template (SetInt) set<int>;
     %template (DominantIndexes) map<libcontour::Point, vector< int > >;
     %template (VectorInt) vector<int>;
+    %template (ItemTable) std::vector< double>;
+    %template (TableDouble) std::vector<std::vector<double> >;
 }
 
 %extend libcontour::Contour {
