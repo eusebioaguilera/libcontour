@@ -68,6 +68,8 @@ namespace libcontour {
              * Operators
              * */
             bool operator==( const Point &p ) const;
+	    
+	    bool operator!=( const Point &p ) const;
             
             bool operator<( const Point &p ) const;
     };

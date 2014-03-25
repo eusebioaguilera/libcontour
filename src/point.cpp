@@ -45,6 +45,14 @@ namespace libcontour {
         return false;
     }
     
+    bool Point::operator!=( const Point &p ) const {
+        if ( this->x() == p.x() && this->y() == p.y() ) {
+            return false;
+        }
+        
+        return true;
+    }
+    
     bool Point::operator<( const Point &p ) const {
         if ( this->x() < p.x() ) {
 			return true;
