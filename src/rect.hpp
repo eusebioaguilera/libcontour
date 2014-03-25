@@ -38,22 +38,22 @@
 
 namespace libcontour {
 	class Rect {
-		int _a;
-		int _b;
-		int _c;
+		double _a;
+		double _b;
+		double _c;
 	
 	protected:
 		// Setters are protected
-		void a( int value ) { this->_a = value; }
-		void b( int value ) { this->_b = value; }
-		void c( int value ) { this->_c = value; }
+		void a( double value ) { this->_a = value; }
+		void b( double value ) { this->_b = value; }
+		void c( double value ) { this->_c = value; }
 		
 	public:
 		
 		// Getters and setters
-		int a( void ) { return this->_a; }
-		int b( void ) { return this->_b; }
-		int c( void ) { return this->_c; }
+		double a( void ) { return this->_a; }
+		double b( void ) { return this->_b; }
+		double c( void ) { return this->_c; }
 		
 		Rect( const Point &p1, const Point &p2 );
 		
