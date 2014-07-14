@@ -150,7 +150,7 @@ public:
 	
 	double computeISEForSegment (const int i, const int j) const throw ();
 
-	//double computeMaxDeviation (const int i, const int j, int* maxDevPoint=0) const throw ();
+	double computeMaxDeviation (const int i, const int j) const throw ();
 };
 
 };

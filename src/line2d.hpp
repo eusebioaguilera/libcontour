@@ -41,6 +41,8 @@ class Line2D {
 		inline double b(void) {return _b;}
 		inline double c(void) {return _c;}
 		
+		double distance(const Point& p);
+		
 	};
 	
 };

@@ -254,4 +254,27 @@ double ContourStats::computeISE (std::vector<int>& dpoints) const throw () {
 	return ise;
 }
 
+double ContourStats::computeMaxDeviation (const int i, const int j) const throw () {
+	double maxDeviation=0.0;
+	int s = _x.size();
+	
+	if (_c[i] != _c[j]){
+		int n = (i+1) % s;
+		
+		while (n!=j){
+			Line2D l = Line2D(_c[i],_c[j]);
+			
+			double temp = l.distance(_c[n]);
+			
+			if (temp > maxDeviation){
+				maxDeviation = temp;
+			}
+			
+			n = (n+1) % s;
+		}
+	}
+	
+	return maxDeviation;
+}
+
 }

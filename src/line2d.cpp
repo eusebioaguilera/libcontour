@@ -36,5 +36,8 @@ Line2D::Line2D(const Point& p1, const Point& p2) {
 			_c = _c/mod;
 }
 
+double Line2D::distance(const Point& p) {
+	return _a * p.x() + _b * p.y() + _c;
+}
 
 };
