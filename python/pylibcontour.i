@@ -9,6 +9,7 @@
 #include "../src/plotter.hpp"
 #include "../src/chaincodes.hpp"
 #include "../src/algorithms.hpp"
+#include "../src/line2d.hpp"
 %}
 
 %include "std_string.i"
@@ -38,3 +39,4 @@ namespace std {
 %include "../src/plotter.hpp"
 %include "../src/chaincodes.hpp"
 %include "../src/algorithms.hpp"
+%include "../src/line2d.hpp"

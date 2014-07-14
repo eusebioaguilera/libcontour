@@ -35,6 +35,7 @@
 #include <limits>
 #include "point.hpp"
 #include "rect.hpp"
+#include "line2d.hpp"
 
 
 
@@ -145,7 +146,7 @@ public:
 	
 	int distance (int i, int j) const throw ();
 	
-	//double computeISE (std::vector<int>& dpoints) const throw ();
+	double computeISE (std::vector<int>& dpoints) const throw ();
 	
 	double computeISEForSegment (const int i, const int j) const throw ();
 

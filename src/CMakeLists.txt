@@ -7,6 +7,7 @@ set(LIB_SRC
 	plotter.cpp
     chaincodes.cpp
     algorithms.cpp
+    line2d.cpp
 	)
 
 #Sends the -Wall flag to the gcc compiler

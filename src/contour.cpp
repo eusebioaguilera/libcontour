@@ -227,13 +227,29 @@ double ContourStats::computeISEForSegment (const int i, const int j) const throw
 		}
 		//std::cout << "Compute ISE" << std::endl;
 		ISE = l.a()*l.a()*xx+l.b()*l.b()*yy+(npoints)*l.c()*l.c()+2.0*l.b()*l.c()*y+2.0*l.a()*l.c()*x+2.0*l.a()*l.b()*xy;
-		std::cout << l.a() << " " << l.b() << " " << l.c() << std::endl;
-		std::cout << ISE << std::endl;
+		//std::cout << l.a() << " " << l.b() << " " << l.c() << std::endl;
+		//std::cout << ISE << std::endl;
 	} else {
 		ISE = 0.0;
 	}
 	
 	return ISE;
+}
+
+double ContourStats::computeISE (std::vector<int>& dpoints) const throw () {
+	int s = dpoints.size();
+	double ise = 0.0;
+	
+	for (int i = 0; i < s; i++){
+		
+		int current = dpoints[i];
+		int next = dpoints[(i+1)%s];
+		
+		ise += computeISEForSegment(current, next);
+		
+	}
+	
+	return ise;
 }
 
 }
