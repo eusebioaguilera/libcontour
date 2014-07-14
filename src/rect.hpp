@@ -60,6 +60,28 @@ namespace libcontour {
 		/// Returns the distance between the rect and the point p
 		double distance( const Point &p );
 	};
+	
+	class Line2D {
+		double _a;
+		double _b;
+		double _c;
+	public:
+		Line2D();
+		Line2D(const Point& p1, const Point& p2) {
+			_a = p2.y() - p1.y();
+			_b = -(p2.x() - p1.x());
+			_c = (_b*p2.y() + _a*p2.x());
+			double mod = sqrt(_a*_a + _b*_b);
+			_a = _a/mod;
+			_b = _b/mod;
+			_c = _c/mod;
+		}
+		
+		inline double a(void) {return _a;}
+		inline double b(void) {return _b;}
+		inline double c(void) {return _c;}
+		
+	};
 };
 
 #endif //RECT_HPP

@@ -23,6 +23,7 @@
 
 
 #include "contour.hpp"
+#include <iostream>
 
 namespace libcontour {
 
@@ -185,6 +186,54 @@ int Contour::dominantPreviousNeighbour( int pos ) {
 	}
 	
 	return neighbour;
+}
+
+
+int ContourStats::distance (int i, int j) const throw () {
+	int s = _x.size();
+	
+	return (j-i+s) % s;
+}
+
+double ContourStats::computeISEForSegment (const int i, const int j) const throw () {
+	double ISE=std::numeric_limits<double>::infinity();
+  
+	const int npoints = distance(i, j) - 1;
+	
+	int jMinus1;
+	//std::cout << "Inside compute ISE" << std::endl;
+	std::cout << npoints << std::endl;
+	
+	if (npoints > 0){
+		//std::cout << "Inside npoints" << std::endl;
+		Line2D l = Line2D(_c[i], _c[j]);
+		
+		jMinus1 = (j-1 + _x.size()) % _x.size();
+		
+		double x, y, xx, yy, xy;
+		
+		if (i<jMinus1){
+			x = _x[jMinus1]-_x[i];
+			y = _y[jMinus1]-_y[i];
+			xx = _xx[jMinus1]-_xx[i];
+			yy = _yy[jMinus1]-_yy[i];
+			xy = _xy[jMinus1]-_xy[i];
+		} else {
+			x = _x[_x.size()-1]-_x[i] + _x[jMinus1];
+			y = _y[_x.size()-1]-_y[i] + _y[jMinus1];
+			xx = _xx[_x.size()-1]-_xx[i] + _xx[jMinus1];
+			yy = _yy[_x.size()-1]-_yy[i] + _yy[jMinus1];
+			xy = _xy[_x.size()-1]-_xy[i] + _xy[jMinus1];
+		}
+		//std::cout << "Compute ISE" << std::endl;
+		ISE = l.a()*l.a()*xx+l.b()*l.b()*yy+(npoints)*l.c()*l.c()+2.0*l.b()*l.c()*y+2.0*l.a()*l.c()*x+2.0*l.a()*l.b()*xy;
+		std::cout << l.a() << " " << l.b() << " " << l.c() << std::endl;
+		std::cout << ISE << std::endl;
+	} else {
+		ISE = 0.0;
+	}
+	
+	return ISE;
 }
 
 }

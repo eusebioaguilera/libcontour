@@ -27,10 +27,14 @@
 
 #include <string>
 #include <fstream>
+#include <cassert>
 #include <vector>
 #include <set>
 #include <map>
+#include <valarray>
+#include <limits>
 #include "point.hpp"
+#include "rect.hpp"
 
 
 
@@ -90,6 +94,62 @@ class Contour {
 		//Polygon _contour;
 		//std::set<int> _dominants;
 		//std::map< Point, int, PointComparer > _indexes;
+};
+
+/*
+ * 
+ * @brief This class computes ISE value in constant time, see 
+ * Juan-Carlos Perez and Enrique Vidal. Optimum polygonal approximation
+ * of digitized curves. Pattern Recognition Letters, 15(8):743–750, August
+ * 1994. ISSN 0167-8655. doi: 10.1016/0167-8655(94)90002-7.
+ * 
+ * 
+ * */
+
+class ContourStats
+{
+	std::valarray<double> _x, _y, _xx, _yy, _xy;
+	Contour _c;
+public:
+
+	void initialize (const Contour& c) throw ()
+	{
+		assert (c.size()>2);
+		//_c.resize(c.size());
+		_c = c;
+		_x.resize(c.size());
+		_y.resize(c.size());
+		_xx.resize(c.size());
+		_yy.resize(c.size());
+		_xy.resize(c.size());
+		double x = c[0].x();
+		double y = c[0].y();
+		_x[0] = x;
+		_y[0] = y;
+		_xx[0] = x*x;
+		_yy[0] = y*y;
+		_xy[0] = x*y;
+		//_c[0] = c[0];
+		for (unsigned p = 1; p<c.size(); ++p)
+		{
+			//_c[p] = c[p];
+			x = c[p].x();
+			y = c[p].y();
+			_x[p] = x + _x[p-1];
+			_y[p] = y + _y[p-1];
+			_xx[p] = x*x + _xx[p-1];
+			_yy[p] = y*y + _yy[p-1];
+			_xy[p] = x*y +  _xy[p-1];
+		}
+	}
+	
+	int distance (int i, int j) const throw ();
+	
+	//double computeISE (std::vector<int>& dpoints) const throw ();
+	
+	double computeISEForSegment (const int i, const int j) const throw ();
+
+	//double computeMaxDeviation (const int i, const int j, int* maxDevPoint=0) const throw ();
 };
 
 };
