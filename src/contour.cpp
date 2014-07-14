@@ -201,14 +201,14 @@ double ContourStats::computeISEForSegment (const int i, const int j) const throw
 	const int npoints = distance(i, j) - 1;
 	
 	int jMinus1;
-	//std::cout << "Inside compute ISE" << std::endl;
-	std::cout << npoints << std::endl;
 	
 	if (npoints > 0){
-		//std::cout << "Inside npoints" << std::endl;
+
 		Line2D l = Line2D(_c[i], _c[j]);
 		
 		jMinus1 = (j-1 + _x.size()) % _x.size();
+		
+
 		
 		double x, y, xx, yy, xy;
 		
@@ -225,10 +225,8 @@ double ContourStats::computeISEForSegment (const int i, const int j) const throw
 			yy = _yy[_x.size()-1]-_yy[i] + _yy[jMinus1];
 			xy = _xy[_x.size()-1]-_xy[i] + _xy[jMinus1];
 		}
-		//std::cout << "Compute ISE" << std::endl;
+
 		ISE = l.a()*l.a()*xx+l.b()*l.b()*yy+(npoints)*l.c()*l.c()+2.0*l.b()*l.c()*y+2.0*l.a()*l.c()*x+2.0*l.a()*l.b()*xy;
-		//std::cout << l.a() << " " << l.b() << " " << l.c() << std::endl;
-		//std::cout << ISE << std::endl;
 	} else {
 		ISE = 0.0;
 	}
@@ -245,7 +243,11 @@ double ContourStats::computeISE (std::vector<int>& dpoints) const throw () {
 		int current = dpoints[i];
 		int next = dpoints[(i+1)%s];
 		
-		ise += computeISEForSegment(current, next);
+		
+		double temp = this->computeISEForSegment(current, next);
+		
+		
+		ise += temp;
 		
 	}
 	

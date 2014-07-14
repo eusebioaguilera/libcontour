@@ -29,7 +29,7 @@ namespace libcontour {
 Line2D::Line2D(const Point& p1, const Point& p2) {
 			_a = p2.y() - p1.y();
 			_b = -(p2.x() - p1.x());
-			_c = (_b*p2.y() + _a*p2.x());
+			_c = -(_b*p2.y() + _a*p2.x());
 			double mod = sqrt(_a*_a + _b*_b);
 			_a = _a/mod;
 			_b = _b/mod;
