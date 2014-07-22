@@ -11,9 +11,9 @@ BOOST_AUTO_TEST_CASE(constructors)
 	// Read contour from file
 	libcontour::Contour c = libcontour::Contour( "../figures/cromosoma.txt" );
 	
-	c.markAsDominant( 0 );
-	c.markAsDominant( 10 );
-	c.markAsDominant( 20 );
+	c.dominant( 0, true );
+	c.dominant( 10, true );
+	c.dominant( 20, true );
 	
 	libcontour::Evaluator eval = libcontour::Evaluator( c );
 }
@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE(ise)
 	int size = sizeof( dominants ) / sizeof( int );
 	
 	for ( int i = 0; i < size; i++ ) {
-		c.markAsDominant( dominants[ i ] );
+		c.dominant( dominants[ i ], true );
 	}
 	
 	libcontour::Evaluator eval = libcontour::Evaluator( c );
