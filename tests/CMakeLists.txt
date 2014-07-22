@@ -21,3 +21,6 @@ target_link_libraries(${TEST_RECT_BIN} contour ${Boost_LIBRARIES})
 
 add_executable(${TEST_EVALUATOR_BIN} ${TEST_EVALUATOR_SRC})
 target_link_libraries(${TEST_EVALUATOR_BIN} contour ${Boost_LIBRARIES})
+
+
+add_test(NAME test_Contour WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/data COMMAND test_contour)
